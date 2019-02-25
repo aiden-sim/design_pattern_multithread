@@ -59,4 +59,14 @@
 ## Single Threaded Execution (이 다리를 건널 수 있는 사람은 오직 한 명)
 - Single Threaded Execution은 한 개의 쓰레드에 의한 실행
 - Critical Section(위험 구역), Critical Region 이라고도 불린다.
+- synchronized의 역할
+  - synchronized 메소드는 동시에 한 개의 쓰레드에서만 실행되는 것을 보증한다.
+- Single Threaded Execution 패턴의 등장인물
+  - SharedResource(공유자원) 역할
+    - safeMethod : 복수의 쓰레드에서 동시에 호출해도 아무런 문제가 없는 메소드
+    - unsafeMethod : 복수의 쓰레드에서 동시에 호출하면 안 되기 때문에 가드가 필요한 메소드 (synchronized)
+    - 크리티컬 세션(critical section) : 싱글 쓰레드로 동작시켜야 되는 범위
+![main](https://user-images.githubusercontent.com/7076334/53351962-51e5b700-3965-11e9-9ecb-c1fd365ae22c.jpg)
+
+
 
