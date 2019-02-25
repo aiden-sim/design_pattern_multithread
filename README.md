@@ -27,6 +27,13 @@
     - notify 메소드를 실행했을 때 wait set에 대기중인 쓰레드가 여러개 있는 경우 어느 쓰레드가 선택될지는 정해져 있지 않다.
   - notifyAll 메소드 (모든 쓰레드를 wait set에서 꺼낸다)
     - notifyAll 메소드를 사용하면 wait set에 있는 모든 쓰레드를 꺼낸다.
-    - 
-  
-  
+    - notify가 한 개의 쓰레드를 깨우는데 반해 notifyAll은 모든 쓰레드를 깨운다.
+    - notify보다 notifyAll을 사용하는 편이 낫다.
+  - wait, notify, notifyAll은 Objectc 클래스의 메소드이다.
+  - 주의점
+    - 락을 가지지 못한 쓰레드가 wait, notify, notifyAll 메소드를 호출하면 IlegalMonitorStateException이 발생된다.
+- 쓰레드의 상태 변화
+  - NEW, RUNNABLE, TERMINATED, WAITING, TIMED_WAITING, BLOCKED
+![state-machine-example-java-6-thread-states](https://user-images.githubusercontent.com/7076334/53339235-1a691180-3949-11e9-8e48-301c386e78ba.png)
+
+
