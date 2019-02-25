@@ -56,5 +56,7 @@
   - 안전성과 생존성을 지키는 것은 필수 이다.
   - 위 조건을 만족한 상태에서 재사용성과 수행 능력을 어떻게 높이느냐가 관건이다. (품질 향상)
   
-  
- 
+## Single Threaded Execution (이 다리를 건널 수 있는 사람은 오직 한 명)
+- Single Threaded Execution은 한 개의 쓰레드에 의한 실행
+- Critical Section(위험 구역), Critical Region 이라고도 불린다.
+
