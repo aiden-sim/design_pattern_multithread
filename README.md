@@ -66,9 +66,6 @@
     - safeMethod : 복수의 쓰레드에서 동시에 호출해도 아무런 문제가 없는 메소드
     - unsafeMethod : 복수의 쓰레드에서 동시에 호출하면 안 되기 때문에 가드가 필요한 메소드 (synchronized)
     - 크리티컬 세션(critical section) : 싱글 쓰레드로 동작시켜야 되는 범위
-
-![main](https://user-images.githubusercontent.com/7076334/53351962-51e5b700-3965-11e9-9ecb-c1fd365ae22c.jpg)
-
 - 언제 사용하면 좋을까?
   - 멀티 쓰레드
   - 복수의 쓰레드가 액세스할 가능성이 있을 때
@@ -77,4 +74,54 @@
 - 생존성과 데드락
   - Single Threaded Execution 패턴을 사용하면 데드락(dead lock)을 일으킬 위험이 있다.
   - 데드락이란 2개의 쓰레드가 2개의 락을 차지하고서 서로 상대방 쓰레드가 락을 해제하기를 기다리는 현상이다. (생존성 상실)
+- 상속이상
+  - 다형성 때문에 자식에서 safeMethod를 오버라이딩 해서 재 구현하면 unsafeMethod가 될 수도 있다.
+- 크리티컬 섹션의 크기와 수행 능력 (수행 능력이 떨어지는 이유)
+  - 락을 취득하는데 시간이 걸리기 때문
+  - 쓰레드의 충돌로 대기하게 되기 때문
+- 관련 패턴
+  - Guarded Suspension
+    - Single Threaded Execution은 쓰레드가 대기 상태에 들어 가는 조건이 '어떠한 쓰레드가 가드되어 있는 unsafeMethod를 실행하고 있는 중인가 아닌가' 여부이지만 Guarded Suspension은 쓰레드가 대기 상태에 들어가는 조건이 '객체 상태가 적절한가 아닌가' 이다.
+    - Guarded Suspension을 구성할 때 객체의 상태를 체크하는 부분에서 Single Threaded Execution 패턴이 사용된다.
+  - Read-Write lock
+    - Single Threaded Execution은 한 개의 쓰레드가 가드되어 있는 unsafeMethod를 실행하고 있다면 다른 쓰레드들은 전원 실행이 완료되기를 기다리지만 Read-Write lock은 복수의 쓰레드가 read 메소드를 동시에 실행할 수 있다. write 메소드를 실행하려 한 쓰레드 만이 대기한다.
+    - Read-Write Lock을 구성할 때 쓰레드의 종류나 개수를 체크하는 부분에서 Single Threaded Execution 패턴이 사용된다.
+  - Immutable
+    - Single Thread Execution에는 unsafeMethod를 한 개의 쓰레드에서만 실행하도록 가드하지만, Immutable은 객체의 상태가 변하지 않기 때문에 모든 메소드가 safeMethod이다.
+  - Thread-Specific Storage
+    - Single Threaded Execution은 복수의 쓰레드가 SharedResource 역할에 액세스 하지만, Thread-Specific Storage은 쓰레드마다 고유 영역이 확보되어 있고, 고유 영역에는 한 개의 쓰레드에서만 액세스할 수 있다. (가드 필요 없음)
+- 보 강
+  - synchronized는 this의 락을 취해야 한다. (유일성)
+  - long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적
+  - 계수 세마포어 : 어떤 영역을 최대 N개의 쓰레드까지 실행
+  
+![singlethreadedexecution](https://user-images.githubusercontent.com/7076334/53421386-e52ff280-3a20-11e9-8323-cc8c8c1a075d.jpg)
+
+## Immutable (망가뜨리고 싶어도 망가지지 않는다.)
+- 어떨 때 사용할까?
+  - 인스턴스 상태가 변하지 않는 것이 필요할 때
+    - setter 미존재, 필드 final
+  - 인스턴스가 공유되어 빈번하게 액세스될 때
+- mutable한 클래스와 immutable한 클래스 비교
+  - ex) StringBuffer (mutable)과 String (immutable)
+- 표준 클래스 라이브러리에서 사용되는 Immutable 패턴
+  - java.lang.String : 문자열
+  - java.math.BigInteger : 큰 수
+  - java.util.regex.Patter : 정규패턴
+  - java.lang.Intger : 래퍼 클래스들
+- 관련 패턴
+  - Singel Thread Execution
+    - Single Thread Execution 패턴은 한 개의 쓰레드가 인스턴스의 상태를 바꾸는 중에 다른 쓰레드가 인스턴스에 액세스 못하게 한다.
+    - 쓰기와 쓰기의 충돌(wirte-write conflict)
+    - 읽기와 쓰기의 충돌(read-write conflict)
+    - Immutable은 상태가 없기 때문에 위 충돌이 일어나지 않는다. read-read은 일어나지만 이것은 충돌이 아니다.
+  - Read-Write lock
+    - Read-Write Lock 패턴은 read-read에서 conflict가 일어나지 않는다는 점을 이용한다.
+    - write-write나 read-write와 같이 conflict가 일어나는 경우 쓰레드의 배타제어를 한다. read-read는 배타제어 안함.(수행능력 높임)
+  - Flyweight
+    - Flyweight 패턴에서는 메모리의 이용 효율을 높이기 위해 인스턴스를 공유한다. (동일 인스턴스)
+    
+![immutable](https://user-images.githubusercontent.com/7076334/53419939-24a90f80-3a1e-11e9-8a5b-fea95b2d1ddd.jpg)
+
+
 
