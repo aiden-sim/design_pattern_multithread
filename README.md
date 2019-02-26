@@ -13,7 +13,7 @@
     - 모든 인스턴스는 wait set을 가진다. 그 인스턴스의 wait 메소드를 실행한 후 동작을 정지하고 있는 쓰레드들의 집합이다.
     - 쓰레드는 wait 메소드를 실행하면 동작을 일시 정지하고 wait set에 들어간다.
     - 다음 한 상황이 발생하면 wait set에서 나올 수 있다.
-      - 1) 다른 쓰레드에서 notifiy 메소드에 의해 깨어난다.
+      - 1) 다른 쓰레드에서 notify 메소드에 의해 깨어난다.
       - 2) 다른 쓰레드에서 notifyAll 메소드에 의해 깨어난다.
       - 3) 다른 쓰레드에서 interrupt 메소드에 의해 깨어난다.
       - 4) wait 메소드가 타임아웃 된다.
@@ -128,5 +128,27 @@
     
 ![immutable](https://user-images.githubusercontent.com/7076334/53419939-24a90f80-3a1e-11e9-8a5b-fea95b2d1ddd.jpg)
 
-
+## Guarded Suspension (준비가 될 때까지 기다려라)
+- Guarded : 보호받고 있다. 지켜지고 있다, Suspension : 일시 정지함
+- 지금 이 처리를 행하면 안 될 때 처리하기 직전에 쓰레드를 기다리게 하는 패턴
+- 조건부 synchronized
+  - Single Threaded Execution 패턴에서는 쓰레드가 한 개라도 크리티컬 섹션 안에 있으면 다른 쓰레드는 들어가지 않고 대기한다.
+  - Guarded Suspension 패턴에서는 쓰레드의 대기 여부가 가드 조건에 의해 결정된다.
+- 여러가지 이름
+  - guarded suspension : 가드되어 있는 실행을 일시 중단한다.
+  - guarded wait : 가드 상태에서 기다린다.
+  - busy wait : 바쁘게 기다린다.
+  - spin lock : 돌아가며 락한다.
+  - polling : 여론 조사를 한다.
+- 관련 패턴
+  - Single Threaded Execution
+    - 가드 조건을 테스트 하는 부분과 테스트 후 상태를 변경하는 부분에는 Single Threaded Execution 패턴이 사용된다.
+  - Balking
+    - 가드 조건이 충족되지 않을 때 Guarded Suspension 패턴에서는 쓰레드는 가드 조건이 충족될 때까지 기다리지만 Baliking 패턴에서는 가드 조건이 충족되는 것을 기다리지 않고 돌아 간다.
+  - Producer-Consumer
+    - Producer 역할이 데이터를 놓을 때와 Consumer 역할이 데이터를 취할 때 양쪽 모두 Guarded Suspension 패턴이 사용된다.
+  - Future
+    - Future 패턴에서는 원하는 정보를 취하려 할때 아직 준비가 안 된 상태라면 Guarded Suspension 패턴을 사용하여 기다린다.
+  
+![guardedsuspension](https://user-images.githubusercontent.com/7076334/53434366-c9851600-3a39-11e9-9b74-dcdbe6429de9.jpg)
 
