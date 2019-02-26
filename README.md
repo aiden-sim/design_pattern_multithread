@@ -95,7 +95,7 @@
   - long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적
   - 계수 세마포어 : 어떤 영역을 최대 N개의 쓰레드까지 실행
   
-![main](https://user-images.githubusercontent.com/7076334/53351962-51e5b700-3965-11e9-9ecb-c1fd365ae22c.jpg)
+![singlethreadedexecution](https://user-images.githubusercontent.com/7076334/53421386-e52ff280-3a20-11e9-8323-cc8c8c1a075d.jpg)
 
 ## Immutable (망가뜨리고 싶어도 망가지지 않는다.)
 - 어떨 때 사용할까?
