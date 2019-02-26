@@ -120,6 +120,11 @@
     - write-write나 read-write와 같이 conflict가 일어나는 경우 쓰레드의 배타제어를 한다. read-read는 배타제어 안함.(수행능력 높임)
   - Flyweight
     - Flyweight 패턴에서는 메모리의 이용 효율을 높이기 위해 인스턴스를 공유한다. (동일 인스턴스)
+- 보 강
+  - final 클래스 : 상속 불가
+  - final 메소드 : 오버라이드 불가
+  - final 인스턴스 필드 : 선언시나 생성자에서 처리
+  - fianl 클래스 필드 : 선언시나 정적 초기화 블록에서 처리
     
 ![immutable](https://user-images.githubusercontent.com/7076334/53419939-24a90f80-3a1e-11e9-8a5b-fea95b2d1ddd.jpg)
 
