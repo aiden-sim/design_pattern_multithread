@@ -77,4 +77,27 @@
 - 생존성과 데드락
   - Single Threaded Execution 패턴을 사용하면 데드락(dead lock)을 일으킬 위험이 있다.
   - 데드락이란 2개의 쓰레드가 2개의 락을 차지하고서 서로 상대방 쓰레드가 락을 해제하기를 기다리는 현상이다. (생존성 상실)
+- 상속이상
+  - 다형성 때문에 자식에서 safeMethod를 오버라이딩 해서 재 구현하면 unsafeMethod가 될 수도 있다.
+- 크리티컬 섹션의 크기와 수행 능력 (수행 능력이 떨어지는 이유)
+  - 락을 취득하는데 시간이 걸리기 때문
+  - 쓰레드의 충돌로 대기하게 되기 때문
+- 관련 패턴
+  - Guarded Suspension
+    - Single Threaded Execution은 쓰레드가 대기 상태에 들어 가는 조건이 '어떠한 쓰레드가 가드되어 있는 unsafeMethod를 실행하고 있는 중인가 아닌가' 여부이지만 Guarded Suspension은 쓰레드가 대기 상태에 들어가는 조건이 '객체 상태가 적절한가 아닌가' 이다.
+    - Guarded Suspension을 구성할 때 객체의 상태를 체크하는 부분에서 Single Threaded Execution 패턴이 사용된다.
+  - Read-Write lock
+    - Single Threaded Execution은 한 개의 쓰레드가 가드되어 있는 unsafeMethod를 실행하고 있다면 다른 쓰레드들은 전원 실행이 완료되기를 기다리지만 Read-Write lock은 복수의 쓰레드가 read 메소드를 동시에 실행할 수 있다. write 메소드를 실행하려 한 쓰레드 만이 대기한다.
+    - Read-Write Lock을 구성할 때 쓰레드의 종류나 개수를 체크하는 부분에서 Single Threaded Execution 패턴이 사용된다.
+  - Immutable
+    - Single Thread Execution에는 unsafeMethod를 한 개의 쓰레드에서만 실행하도록 가드하지만, Immutable은 객체의 상태가 변하지 않기 때문에 모든 메소드가 safeMethod이다.
+  - Thread-Specific Storage
+    - Single Threaded Execution은 복수의 쓰레드가 SharedResource 역할에 액세스 하지만, Thread-Specific Storage은 쓰레드마다 고유 영역이 확보되어 있고, 고유 영역에는 한 개의 쓰레드에서만 액세스할 수 있다. (가드 필요 없음)
+- 보 강
+  - synchronized는 this의 락을 취해야 한다. (유일성)
+  - long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적
+  - 계수 세마포어 : 어떤 영역을 최대 N개의 쓰레드까지 실행
+  
+  
+
 
