@@ -215,3 +215,4 @@
     - take 메소드에도 Guarded Suspension 패턴이 사용되고 있다.
     
     
+![producerconsumer](https://user-images.githubusercontent.com/7076334/53575989-1261d980-3bb6-11e9-91d6-85ab41309806.jpg)
