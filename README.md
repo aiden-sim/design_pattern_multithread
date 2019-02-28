@@ -202,3 +202,16 @@
     
 ![balking](https://user-images.githubusercontent.com/7076334/53535888-a34d9c00-3b47-11e9-8209-bf111c8fb2ba.jpg)
 
+
+## Producer-Consumer (내가 만들고 당신이 사용한다)
+- producer는 생산자란 뜻이며 데이터를 작성하는 쓰레드를 가리킨다. 또한 consumer는 소비자란 뜻으로 데이터를 이용하는 쓰레드를 가리킨다.
+- Producer-Consumer 패턴에서는 생산자와 소비자 사이에 중개 역할이 존재하는데 이 중개 역할이 양쪽 쓰레드간 처리 속도의 차이를 메우게 된다.
+- 생산자 소비자가 1:1 일 때는 Pipe 패턴이라고도 부른다.
+- put 메소드
+  - Guarded Suspension
+    - put 메소드에는 Guarded Suspension 패턴이 사용되고 있다.
+- take 메소드
+  - System.out.println(e);
+    - take 메소드에도 Guarded Suspension 패턴이 사용되고 있다.
+    
+    
