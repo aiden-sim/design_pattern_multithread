@@ -152,3 +152,53 @@
   
 ![guardedsuspension](https://user-images.githubusercontent.com/7076334/53434366-c9851600-3a39-11e9-9b74-dcdbe6429de9.jpg)
 
+## Balking (필요 없으면 관둬라)
+- 지금 이 처리를 실행하면 곤란하다거나 당장 실행할 필요가 없는 경우 처리 직전에 실행을 중단하고 돌아 가는 패턴
+- 어떠한 경우에 사용하는가? (적용 가능성)
+  - 굳이 처리할 필요가 없는 경우
+    - 굳이 처리할 필요가 없을 경우 사용하면 수행 능력이 높아진다.
+  - 가드 조건이 충족되기를 기다리고 싶지 않은 경우
+    - Balking 특징은 기다리지 않는데 있다. 가드 조건을 만족하지 않으면 바로돌아 간다. (응답성 높아짐)
+  - 가드 조건을 만족하는 것이 처음 1회뿐인 경우
+    - Singleton에서 객체 최초 1회 초기화 시키는 경우랑 비슷한듯
+- 단 한번만 상태가 변하는 변수를 일반적으로 래치(latch)라고 한다.
+- balk 결과 표현 방법
+  - balk 발생을 무시하는 방법 : 호출 하는 측에 balk 발생을 전하지 않는 방법 (간단)
+  - balk 발생을 반환 값으로 표현하는 방법 : balk 발생한 사실을 boolean 형 값으로 표현하는 경우가 있다. (true/false)
+  - balk 발생을 예외로 표현하는 방법 : 메소드로부터 예외를 throw 하게 된다.
+- 관련 패턴
+  - Guarded Suspension
+    - Guarded Suspension 패턴에서는 쓰레드가 guardedMethod의 가드 조건이 만족될 때 까지 기다린다. (wait)
+    - Balking 패턴에서는 쓰레드는 가드 조건을 만족하지 않으면 바로 돌아간다.
+  - Observer 패턴
+    - Observer 패턴을 멀티 쓰레드 환경에서 사용할 때 Balking 패턴을 이용하는 경우가 있다.
+- 보 강 (타임아웃)
+  - Balking 패턴과 Guarded Suspension 패턴의 중간
+    - 두 패턴의 중간 단계로서 가드 조건을 만족할 때까지 일정 시간 기다리는 방법도 있다. (일정 시간 만족 못하면 balk 처리)
+  - wait가 종료되는 경우
+    - notify 메소드가 실행되었을 때 (어떤 쓰레드를 깨울지는 정해져 있지 않음.)
+    - notifyAll 메소드가 실행되었을 때 (wait 셋 안의 모든 쓰레드 깨움)
+    - interrupt 메소드 실행 (notify, notifyAll 메소드는 인스턴스 대상으로 발행하지만, interrupt는 쓰레드에 대하여)
+    - 타임아웃이 일어났을 때 (wiat 메소드의 인수로 지정한 타임아웃 시간을 결과한 경우)
+  - synchronized에는 타임아웃이 없으며, 인터럽트도 불가능하다.
+    - synchronized로 락을 취하려고 블록 하고 있는 상태와 wait를 실행하고 wait 셋 안에 있는 상태
+    - 1) synchronized로 락을 취하려고 블록하고 있는 상태
+      - 쓰레드를 타임아웃 시킬 방법이 없다. 
+      - interrupt를 실행하더라도 InterruptedException이 통보되지 않는다.
+      - 락을 취하고 synchronized 안에 들어간 후에 wait, sleep, join 등의 인터럽트 상태를 의식하는 메소드를 호출 하던가, isInterrupted 메소드나 interrupt 메소드를 사용하여 인터럽트 상태 조사 후 직접 throw 해야 한다.
+    - 2) wait을 실행하고 wait 셋 안에 있는 상태
+      - wait(timeout) 사용
+      - interrupt를 실행하면 InterruptedException이 통보
+  - java.util.concurrent에서의 타임아웃
+    - 1) 예외로 타임아웃
+      - java.util.concurrent.Future 인터페이스의 get 메소드
+      - java.util.concurrent.Exchanger 클래스의 exchange 메소드
+      - java.util.concurrent.CyclicBarrier 클래스의 await 메소드
+      - java.util.concurrent.CountDownLatch 클래스의 await 메소드
+    - 2) 반환 값으로 타임아웃
+      - java.util.concurrent.BlockingQueue 인터페이스 (offer 메소드의 반환값 false, poll 메소드 반환값 null 일 때 타임아웃 표시)
+      - java.util.concurrent.Semaphoer 클래스 (tryAcquire 메소드에서는 반환 값이 false일 때 타임아웃 표시)
+      - java.util.concurrent.locks.Lock 인터페이스 (tryLock 메소드에서는 반환 값이 false일 때 타임아웃 표시) 
+    
+![balking](https://user-images.githubusercontent.com/7076334/53535888-a34d9c00-3b47-11e9-8209-bf111c8fb2ba.jpg)
+
