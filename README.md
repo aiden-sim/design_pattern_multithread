@@ -238,6 +238,39 @@
   - Strategy 패턴
     - Producer-Consumer 패턴에서 Producer 역할이 Consumer 역할에게 건네는 Data 역할의 순서를 정하는 부분에서 Strategy 패턴을 사용할 수 있다.
 - 보 강
-  - 
+  - interruptedException이 붙는 메소드는 시간이 걸릴 지는 모르나 취소할 수 있는 메소드
+    - java.lang.Object 클래스의 wait 메소드
+    - java.lang.Thread 클래스의 sleep 메소드
+    - java.lang.Thread 클래스의 join 메소드
+  - sleep 메소드와 interrupt 메소드 (sleep 락 필요 없음)
+    - sleep하고 있는 쓰레드는 interrupt가 호출되면 일시 정지를 중단하고 interrupted Execption이라고 하는 예외를 통보한다.
+  - wait 메소드와 interrupt 메소드 (wait 락 필요)
+    - wait하고 있는 쓰레드는 interrupt가 호출되면 notify를 기라디지 않고 wait 셋에서 나오게 된다.
+    - 주의 할 점은 쓰레드는 wait 셋에 들어갈 때 일단 락을 해제한다. wait중 interrupt를 호출 받은 쓰레드(취소 쓰레드)는 락을 취한 다음 InterruptedExecption을 통보 한다.
+    - notify/notifyAll은 java.lang.Object 클래스 메소드이며 실행하기 위해 락을 취해야 한다.
+    - 반면 interrupt는 java.lang.Thread 클래스 메소드이며 락을 취할 필요 없이 쓰레드를 직접 깨운다.
+  - join 메소드와 interrupt 메소드 (join 락 필요 없음)
+    - join하고 있는 메소드로 다른 쓰레드가 종료되기를 기다리고 있을 때도 interrupt 메소드로 취소할 수 있다.
+  - 쓰레드에서 sleep, wait, join 등의 메소드를 호출했을 때 비로서 InterruptedExecption이 통보된다.
+  - isInterrupted 메소드
+    - 지정한 쓰레드가 인터럽트 상태라면 true / 인터럽트 상태가 아니라면 false
+  - Thread.interrupted 메소드
+    - 지정한 쓰레드가 인터럽트 상태라면 true / 인터럽트 상태가 아니라면 false.
+    - Thread.interrupted를 호출하면 인터럽트 상태는 삭제된다. (쓰레드를 비인트럽트 상태로 만든다.)
+  - interrupt는 인터럽트 상태로 만드는 것이며, interrupted는 인터럽트 상태를 삭제 하는 메소드다.
+  - Thread의 stop(deprecate)는 안전성을 위협하기 때문에 사용하지 말자
+- 보 강2
+  - BlockingQueue (Producer-Consumer의 Channel 역할)
+    - BlockingQueue는 적절한 상태가 될 때까지 쓰레드가 블록(wait)하는 큐이다.
+    - put과 take 메소드를 가지고 있다.
+  - 종류
+    - ArrayBlockingQueue (배열 베이스)
+    - LinkedBlockingQueue (연결 리스트)
+    - ProirotyBlockingQueue (우선순위)
+    - DelayQueue (일정 시간이 지나면 take 할 수 없는)
+    - SynchronousQueue (직접 건네는)
+    - ConcurrentLinkedQueue (요소 수에 제한이 없는 쓰레드 세이프한 큐)
+    
+    
     
 ![producerconsumer](https://user-images.githubusercontent.com/7076334/53575989-1261d980-3bb6-11e9-91d6-85ab41309806.jpg)
