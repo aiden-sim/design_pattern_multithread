@@ -271,6 +271,4 @@
     - SynchronousQueue (직접 건네는)
     - ConcurrentLinkedQueue (요소 수에 제한이 없는 쓰레드 세이프한 큐)
     
-    
-    
 ![producerconsumer](https://user-images.githubusercontent.com/7076334/53575989-1261d980-3bb6-11e9-91d6-85ab41309806.jpg)
