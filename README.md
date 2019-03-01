@@ -213,6 +213,31 @@
 - take 메소드
   - System.out.println(e);
     - take 메소드에도 Guarded Suspension 패턴이 사용되고 있다.
-    
+- 안정성을 지키는 Channel 역할 (재상용성)
+  - synchrnoized, wait, notifiyAll 등 사용하여 멀티 쓰레드의 동작을 제어하고 있는 코드는 모두 Channel 클래스 안에 있다.
+- 어떤 순서로 Data 역할을 건에야 할까
+  - Channel 역할이 Data 역할을 여러 개 가지고 있는 경우 어떠한 순서로 건네야 할까?
+    - 큐(FIFO) - 먼저 받은 것부터 건넨다.
+    - 스택(LIFO) - 나중에 받은 것을 먼저 건넨다.
+    - 우선 순위를 매키는 큐(Proiory Queue) - 우선할 것을 먼저 건넨다.
+- 배타제어(synchronized) 고려 사항
+  - 쓰레드의 협조동작에서는 중간에 들어가는 것을 생각하자
+  - 쓰레드의 배타제어에서는 지켜야 할 것을 생각하자
+- Consumer가 단수이면?
+  - Consumer끼리 배타제어를 고려하지 않아도 된다. (Producmer, Consumer 역할끼리 간섭은 주의)
+- 관련 패턴
+  - Mediator
+    - Mediator 패턴에서는 중간에 ConcreteMediator 역할리 처리를 조정, 제어 한다.
+    - Producer-Consumer 패턴의 Channel 역할도 Producer와 Consumer 역할을 조정, 제어 한다.
+  - Worker Thread
+    - Producer-Consumer 패턴에서는 Producer 역할이 Consumer 역할에게 데이터를 건넨다고 하는 부분에 초점이 있다.
+    - Worekr Thread 패턴에서도 client 역할이 Worker 역할에게 데이터를 건넨다.
+    - Worker Thread 패턴에서는 데이터를 처리하는 쓰레드를 공유(쓰레드 풀) 비용을 낮춘다.
+  - Command 패턴
+    - Producer-Consumer 패턴에서 Producer 역할이 Consumer 역할에게 건네는 Data 역할 부분에 Command 패턴이 사용되는 경우가 있다.
+  - Strategy 패턴
+    - Producer-Consumer 패턴에서 Producer 역할이 Consumer 역할에게 건네는 Data 역할의 순서를 정하는 부분에서 Strategy 패턴을 사용할 수 있다.
+- 보 강
+  - 
     
 ![producerconsumer](https://user-images.githubusercontent.com/7076334/53575989-1261d980-3bb6-11e9-91d6-85ab41309806.jpg)
