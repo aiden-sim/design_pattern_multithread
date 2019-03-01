@@ -277,7 +277,35 @@
 - 읽는 처리를 실행해도 인스턴스의 상태가 바뀌지 않으므로 여러 개의 쓰레드가 동시에 읽는 것은 문제가 없다.
 - 하지만 읽고 있는 중간에 쓰면 상태가 달라진다.
 - 쓰기에 대한 배타제어와 읽기에 대한 배타제어를 분리하면 수행 능력을 높일 수 있다.
-
+- 읽기 처리끼리 충돌하지 않는 점을 이용하여 수행 능력을 높이다.
+  - 읽기 처리는 SharedReosurce 역할의 상태를 변경하지 않기 때문에 상호 배타제어를 할 필요가 없다.
+- 읽기 처리가 무거울 때 유효
+- 읽기 빈도가 쓰기 빈도보다 높을 때 유효
+- 락의 의미
+  - synchronized (물리적인 락) : 2개 이상의 쓰레드가 동시에 확보할 수 없다.
+  - Read-Write Lock (논리적인 락) : Java 언어 사양이 아니라 프로그래머가 구현한 장치 (wait, notify/notifyAll 이용)
+- 관련 패턴
+  - Immutable
+    - Immutable 패턴은 내부 상태가 절대 변하지 않는다.
+    - Read-Write Lock 패턴은 Reader 역할끼리 배타제어를 없애 수행 능력을 높인다.
+  - Single Thread Execution
+    - Single Thread Execution 패턴은 프로그램의 특정 부분을 실행할 수 있는 쓰레드의 수를 한 개로 제한한다.
+    - Read-Write Lock 패턴은 프로그램의 특정 부분을 실행할 수 있는 Write 역할의 쓰레드를 한 개로 제한한다. Reader 역할의 수는 제한하지 않는다.
+  - Guarded Suspension
+    - Guarded Suspension 패턴은 Read-Write Lock 패턴의 ReadWriteLock 역할을 만들 때 사용한다.
+  - Before/After
+    - Read-Write Lock 패턴은 락의 해제를 잊어버리는 것을 방지하기 위해 Before/After 패턴과 함께 사용되는 경우가 있다.
+  - Strategized Locking
+    - Read-Write Lock 패턴에서는 Reader 역할과 Write 역할의 특징이 살린 배타제어를 실행하여 수행 능력을 높인다.
+    - Strategized Locking 패턴에서는 동기를 위한 기구를 파라미터화하여 훨씬 유연한 배타제어를 실현한다.
+- 보 강
+  - java.util.concurrent.locks 패키지
+    - java.util.concurrent.locks.ReadWriteLock 인터페이스는 읽기 위한 락과, 쓰기 위한 락을 별도의 객체로서 취급한다.
+    - java.util.concurrent.locks.ReentrantReadWriteLock 클래스는 위의 인터페이스를 구현 한 것
+      - 공평성 : 락의 취득 순서를 공평(fair) 하게 할 것인지 선택 가능
+      - 재입장 가능성 : Reader 역할의 쓰레드가 쓰기 위한 락을 취하거나, Write 역할의 쓰레드가 읽기 위한 쓰레드를 취하는 것이 가능하다.
+      - 락의 다운그레이드 : 쓰기 위한 락을 취한다 -> 읽기 위한 락을 취한다 -> 쓰기 위한 락을 해제한다. (읽기 위한 락 -> 쓰기 위한 락 불가)
+      - 편리한 메소드 : 현재 대기중인 쓰레드 수를 구하는 메소드 등 제공
 
 ![readwritelock](https://user-images.githubusercontent.com/7076334/53653235-37c21680-3c8e-11e9-9425-bffa74d68e5b.jpg)
 
