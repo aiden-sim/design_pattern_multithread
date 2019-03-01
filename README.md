@@ -272,3 +272,12 @@
     - ConcurrentLinkedQueue (요소 수에 제한이 없는 쓰레드 세이프한 큐)
     
 ![producerconsumer](https://user-images.githubusercontent.com/7076334/53575989-1261d980-3bb6-11e9-91d6-85ab41309806.jpg)
+
+## Read-Write Lock (다 같이 읽는 것은 상관없지만 읽는 중간에 쓰는건 안된다.)
+- 읽는 처리를 실행해도 인스턴스의 상태가 바뀌지 않으므로 여러 개의 쓰레드가 동시에 읽는 것은 문제가 없다.
+- 하지만 읽고 있는 중간에 쓰면 상태가 달라진다.
+- 쓰기에 대한 배타제어와 읽기에 대한 배타제어를 분리하면 수행 능력을 높일 수 있다.
+
+
+![readwritelock](https://user-images.githubusercontent.com/7076334/53653235-37c21680-3c8e-11e9-9425-bffa74d68e5b.jpg)
+
