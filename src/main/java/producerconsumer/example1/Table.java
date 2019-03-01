@@ -43,4 +43,11 @@ public class Table {
         System.out.println(Thread.currentThread().getName() + " take " + cake);
         return cake;
     }
+
+    public synchronized void clear() {
+        this.head = 0;
+        this.tail = 0;
+        this.count = 0;
+        notifyAll();
+    }
 }
