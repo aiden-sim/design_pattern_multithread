@@ -1,8 +1,9 @@
-package readwritelock.exampl1;
+package readwritelock.example1;
 
 import java.util.Random;
 
 /**
+ * Writer (쓰는 사람) 역할
  * 쓰려고 하는 쓰레드를 나타내는 클래스
  */
 public class WriterThread extends Thread {

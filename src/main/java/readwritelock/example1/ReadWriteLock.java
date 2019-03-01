@@ -1,6 +1,7 @@
-package readwritelock.exampl1;
+package readwritelock.example1;
 
 /**
+ * ReadWriteLock (읽고 쓰기용 락) 역할
  * 읽고 쓰기의 락을 제공하는 클래스
  * 읽기와 쓰기의 충돌 (read-write conflict 고려)
  * 쓰기와 쓰기의 충돌 (write-write conflict 고려)

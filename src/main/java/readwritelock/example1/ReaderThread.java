@@ -1,6 +1,7 @@
-package readwritelock.exampl1;
+package readwritelock.example1;
 
 /**
+ * Reader(읽는 사람) 역할
  * 읽으려 하는 쓰레드를 나타내는 클래스
  */
 public class ReaderThread extends Thread {

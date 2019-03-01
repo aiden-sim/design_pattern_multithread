@@ -1,6 +1,7 @@
-package readwritelock.exampl1;
+package readwritelock.example1;
 
 /**
+ * SharedResource (공유 자원) 역할
  * 읽고 쓰기가 가능한 클래스
  */
 public class Data {
