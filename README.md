@@ -309,7 +309,7 @@
 
 ![readwritelock](https://user-images.githubusercontent.com/7076334/53653235-37c21680-3c8e-11e9-9425-bffa74d68e5b.jpg)
 
-## Thread-Per-Message (이 일을 부탁해요)
+## Thread-Per-Message (이 일을 부탁한다)
 - per라고 하는 것은 ~마다 라고 하는 의미니까 직역 하면 '메시지마다 쓰레드' 라는 뜻이 된다.
 - 어떠한 명령이나 요구마다 새로 한 개의 쓰레드가 할당되고 그 쓰레드가 처리를 실행한다.
 - Thrad-Per-Message 패턴을 사용하면 메시지를 의뢰하는 측과 메시지를 처리하는 측의 쓰레드가 서로 달라진다.
@@ -335,8 +335,15 @@
       - 쓰레드가 메모리를 공유 하기 때문에 배타제어가 필요하다.
     - 쓰레드는 콘텍스트 스위치(context-switch)가 가볍다.
       - 프로세스와 쓰레드의 또 다른 차이점은 콘텍스트 스위치의 무게다.
-
-
+- 정 리
+  - java.lang.Thread 클래스 : 가장 기본적인 쓰레드 생성,기동 클래스
+  - java.lang.Runnable 인터페이스 : 쓰레드가 실행하는 일을 나타내는 인터페이스
+  - java.utilconcurrent.ThreadFactory 인터페이스 : 쓰레드 생성을 추상화한 인터페이스
+  - java.utilconcurrent.Executor 인터페이스 : 쓰레드의 실행을 추상화한 인터페이스
+  - java.utilconcurrent.ExecutorSerive 인터페이스 : 재사용되는 쓰레드의 실행을 추상화한 인터페이스
+  - java.utilconcurrent.ScheduledExecutorService 인터페이스 : 스케줄링 된 쓰레드의 실행을 추상화한 인터페이스
+  - java.utilconcurrent.Executors 인터페이스 : 인터페이스 생성의 유틸리티 클래스
+  
 ![threadpermessage](https://user-images.githubusercontent.com/7076334/53684320-107f4e00-3d4f-11e9-898a-91fff14e0c1a.jpg)
 
 
