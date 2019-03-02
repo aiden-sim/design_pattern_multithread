@@ -1,6 +1,6 @@
 package threadpermessage.threadfactory;
 
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.Executors;
 
 /**
  * Client(의뢰자) 역할
@@ -11,15 +11,23 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("main BEGIN");
         // factory method
+        // ThreadFactory
         // 쓰레드 생성의 상세 내용을 제어할 수 있다.
-        Host host = new Host(
+/*        Host host = new Host(
                 new ThreadFactory() {
                     @Override
                     public Thread newThread(Runnable r) {
                         return new Thread(r);
                     }
                 }
+        );*/
+
+        // Executor 방식
+        // 참고로 ThreadFactory, Executors의 선택에 방식에 따라서 Host는 변경이 필요 없기 때문에 재사용성이 높다.
+        Host host = new Host(
+                Executors.defaultThreadFactory()
         );
+
         host.request(10, 'A');
         host.request(20, 'B');
         host.request(30, 'C');
