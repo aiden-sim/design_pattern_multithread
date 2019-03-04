@@ -340,11 +340,54 @@
   - java.lang.Runnable 인터페이스 : 쓰레드가 실행하는 일을 나타내는 인터페이스
   - java.utilconcurrent.ThreadFactory 인터페이스 : 쓰레드 생성을 추상화한 인터페이스
   - java.utilconcurrent.Executor 인터페이스 : 쓰레드의 실행을 추상화한 인터페이스
-  - java.utilconcurrent.ExecutorSerive 인터페이스 : 재사용되는 쓰레드의 실행을 추상화한 인터페이스
+  - java.utilconcurrent.ExecutorService 인터페이스 : 재사용되는 쓰레드의 실행을 추상화한 인터페이스
   - java.utilconcurrent.ScheduledExecutorService 인터페이스 : 스케줄링 된 쓰레드의 실행을 추상화한 인터페이스
   - java.utilconcurrent.Executors 인터페이스 : 인터페이스 생성의 유틸리티 클래스
   
 ![threadpermessage](https://user-images.githubusercontent.com/7076334/53684320-107f4e00-3d4f-11e9-898a-91fff14e0c1a.jpg)
+
+## Worker Thread (일이 올 때까지 기다리고, 일이 오면 작업한다)
+- Worker Thread 패턴에서는 워커 쓰레드가 일을 하나씩 가지러 가고, 또 처리를 한다. 일이 없으면 워크 쓰레드는 새로운 일이 올 때까지 기다린다.
+- Worker Thread를 Background Thread라고 한다.
+- ThreadPool : Worker Thread를 많이 보관하고 있는 장소
+- 쓰루풋의 향상
+  - Worker Thread 패턴에서는 쓰레드를 돌려가면서 사용하고 재활용함으로써 쓰루풋을 높인다.
+- 용량의 제어
+  - Worker 역할의 수
+    - java.util.concurrent.ThreadPoolExecutor 클래스는 이러한 용량 제어를 실행하는 클래스이다.
+  - Request 역할의 수
+    - Request 역할의 수가 많으면 Client 역할과 Worker 역할간 처리속도의 차이를 메울 수 있다.
+    - 한편으로 Request 역할을 보관하는데 대량의 메모리를 소비한다. (용량과 리소스의 이율배반 존재)
+- invocation과 execution 분리
+  - 메소드의 기동과 메소드의 실행을 분리한다. 메소드를 기동하는 것을 invocation(동사는 invoke), 메소드를 실행하는 것을 execution(동사는 execute) 라고 한다.
+  - Worker Thread 패턴이나 Thread-Per-Message 패턴은 메소드의 invocation과 execution을 분리하고 있다.
+  - 응답성의 향상
+    - invocation과 execution을 분리하지 않으면 execution에 시간이 걸리는 경우 invocation 처리까지 늦어진다.
+  - 실행 순서의 제어(스케줄링)
+    - invocation과 execution을 분리해 두면 invoke 순서와 상관없이 execute 할 수 있다.
+- 관련 패턴
+  - Producer-Consumer
+    - Worker Thread 패턴에서 Request 역할을 전달하는 부분을 Producer(Client)-Consumer(Worker) 패턴으로 되어 있다.
+  - Thread-Per-Message
+    - Thread-Per-Message 패턴은 새로 만든 쓰레드에 실제 처리기를 맡겨 응답성을 높이다. 그러나 쓰레드 기동 시간이 있다.
+    - Worker Thread 패턴에서는 Thread-Per-Message 패턴과 마찬가지로 별도의 쓰레드에게 실제 처리를 맡긴다. 하지만 미리 기동해 둔다. (쓰레드 풀)
+  - Command
+    - Worker Thread 패턴 가운데 Worker 역할이 업무를 받아서 작업하는 부분에 Command 패턴이 사용되는 경우가 있다.
+    - Request => Command 역할에 대응
+  - Future
+    - Client 역할이 Worker 역할의 실행 결과를 구하고자 할 때, Future 패턴을 사용한다.
+  - Flyweight
+    - Flyweight는 인스턴스를 공유함으로써 메모리를 절약한다.
+    - Worker Thread 패턴은 워커 쓰레드를 공유하여 쓰레드 기동 시간을 절약하고 있다.
+  - Thread-Specific Storage
+    - Thread-Specific Storage 패턴은 쓰레드의 고유 영역을 확보하기 위한 것이다.
+    - 워커 쓰레드에는 각각의 업무에 고유 정보 (Reuqest에 있다.)를 담지 않기 때문에 Thread-Specific Storage 패턴을 사용하는 것은 불가능하다.
+  - Active Object
+    - Worker Thread 패턴은 Active Object 패턴의 일부로서 사용되고 있다.
+- 보 강
+  - 
+
+![workerthread](https://user-images.githubusercontent.com/7076334/53735481-56145600-3eca-11e9-829f-606c460435e8.jpg)
 
 
 
