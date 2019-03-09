@@ -385,7 +385,6 @@
   - Active Object
     - Worker Thread 패턴은 Active Object 패턴의 일부로서 사용되고 있다.
 - 보 강
-  - 
 
 ![workerthread](https://user-images.githubusercontent.com/7076334/53735481-56145600-3eca-11e9-829f-606c460435e8.jpg)
 
