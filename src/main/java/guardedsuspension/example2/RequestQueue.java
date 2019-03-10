@@ -1,4 +1,4 @@
-package guardedsuspension.exampl2;
+package guardedsuspension.example2;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

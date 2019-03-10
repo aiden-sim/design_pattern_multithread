@@ -1,4 +1,4 @@
-package guardedsuspension.exampl1;
+package guardedsuspension.example1;
 
 import java.util.LinkedList;
 import java.util.Queue;

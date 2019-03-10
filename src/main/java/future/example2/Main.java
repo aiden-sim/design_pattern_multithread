@@ -1,4 +1,4 @@
-package future.exampl1;
+package future.example2;
 
 /**
  * Client(의뢰자) 역할

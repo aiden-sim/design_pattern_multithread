@@ -1,16 +1,16 @@
-package guardedsuspension.exampl2;
+package guardedsuspension.example1;
 
 import java.util.Random;
 
 /**
- * 리퀘스트를 접수하는 클래스
+ * 리퀘스트를 제시하는 클래스
  */
-public class ServerThread extends Thread {
+public class ClientThread extends Thread {
     private final Random random;
 
     private final RequestQueue requestQueue;
 
-    public ServerThread(RequestQueue requestQueue, String name, long seed) {
+    public ClientThread(RequestQueue requestQueue, String name, long seed) {
         super(name);
         this.requestQueue = requestQueue;
         this.random = new Random(seed);
@@ -18,8 +18,9 @@ public class ServerThread extends Thread {
 
     public void run() {
         for (int i = 0; i < 10000; i++) {
-            Request request = requestQueue.getReuqest();
-            System.out.println(Thread.currentThread().getName() + " handles " + request);
+            Request request = new Request("No." + i);
+            System.out.println(Thread.currentThread().getName() + " requests " + request);
+            requestQueue.putRequest(request);
             try {
                 Thread.sleep(random.nextInt(1000));
             } catch (InterruptedException e) {

@@ -1,4 +1,4 @@
-package future.exampl1;
+package future.example1;
 
 /**
  * RealData(현실의 데이터) 역할

@@ -1,4 +1,4 @@
-package guardedsuspension.exampl2;
+package guardedsuspension.example2;
 
 /**
  * 동작 테스트용 클래스

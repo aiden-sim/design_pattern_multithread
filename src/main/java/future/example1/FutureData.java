@@ -1,4 +1,4 @@
-package future.exampl1;
+package future.example1;
 
 /**
  * Future(선물) 역할

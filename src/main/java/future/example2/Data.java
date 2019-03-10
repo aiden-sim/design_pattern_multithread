@@ -1,4 +1,4 @@
-package future.exampl1;
+package future.example2;
 
 /**
  * VirtualData(가상 데이터) 역할

@@ -1,4 +1,4 @@
-package future.exampl1;
+package future.example1;
 
 /**
  * Host 역할

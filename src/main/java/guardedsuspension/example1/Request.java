@@ -1,4 +1,4 @@
-package guardedsuspension.exampl1;
+package guardedsuspension.example1;
 
 /**
  * 한 개의 리퀘스트를 표현한 클래스
