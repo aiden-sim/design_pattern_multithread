@@ -385,7 +385,28 @@
   - Active Object
     - Worker Thread 패턴은 Active Object 패턴의 일부로서 사용되고 있다.
 - 보 강
-
+  - ThreadPoolExecutor 클래스
+    - ThreadPoolExecutor에는 쓰레드풀(워커 쓰레드 보관, 관리)에 대하여 다음과 같은 설정을 할 수 있습니다.
+      - 쓰레드풀의 크기 지정
+      - 쓰레드를 미리 생성할 것인지 필요에 따라 생성할 것인지 지정
+      - 쓰레드를 생성할 때의 팩토리(java.util.concurrent.ThreadFactory)지정
+      - 필요 없어진 워커 쓰레드를 종료시키기까지의 시간 지정
+      - 실행하는 일을 건넬 때의 큐잉 방법 지정
+      - 실행 거부(reject)하는 방법 지정
+      - 실행의 전처리,후처리 지정
+    - Executors.newFixedThreadPool 메소드
+      - 인수로 지정한 개수의 워커 쓰레드를 생성하는 쓰레드풀을 만든다.
+      - 만들어진 워커 쓰레드는 재사용된다.
+      - newFixedThreadPool의 인수에 ThreadFactory 객체를 추가하면 새로운 워커 쓰레드는 그 ThreadFactory를 사용하여 생성된다.
+    - Executors.newCachedThreadPool 메소드
+      - 필요에 따라 워커 쓰레드가 자동 생성되는 쓰레드풀을 만든다.
+      - 만들어진 워커 쓰레드는 재사용되고, 일이 없어진 워커 쓰레드는 약 60초동안만 캐시로서 보관되고 자동 삭제된다.
+      - newCachedThreadPool의 인수에 ThreadFactory 객체를 추가하면 새로운 워커 쓰레드는 그 ThreadFactory를 사용하여 생성된다.
+    - Executors.newScheduledThreadPool 메소드
+      - 리퀘스트를 일정 시간 후에 실행하거나 반복실행하는 쓰레드풀을 만든다.
+      - 리퀘스트가 없을 때에도 보관해 두는 쓰레드의 개수를 인수로 지정한다.
+      - newScheduledThreadPool 인수에 ThreadFactory 객체를 추가하면 새로운 워커 쓰레드는 그 ThreadFactory를 사용하여 생성된다.
+   
 ![workerthread](https://user-images.githubusercontent.com/7076334/53735481-56145600-3eca-11e9-829f-606c460435e8.jpg)
 
 
