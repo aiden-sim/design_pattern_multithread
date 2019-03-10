@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Consumer (소비자)
- * Channel 역할로부터 DAta 역할을 받아 이용한다.
+ * Channel 역할로부터 Data 역할을 받아 이용한다.
  * 손님을 나타내는 클래스
  */
 public class EaterThread extends Thread {

@@ -1,4 +1,4 @@
-package workerthread.exampl1;
+package workerthread.example1;
 
 /**
  * 동작 테스트용 클래스

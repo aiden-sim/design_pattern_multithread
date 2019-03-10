@@ -1,4 +1,4 @@
-package workerthread.exampl1;
+package workerthread.example1;
 
 /**
  * Worker(작업자) 역할

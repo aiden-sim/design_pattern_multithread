@@ -1,4 +1,4 @@
-package workerthread.exampl1;
+package workerthread.example1;
 
 /**
  * Channel(통신로) 역할

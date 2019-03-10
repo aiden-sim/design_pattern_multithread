@@ -1,4 +1,4 @@
-package workerthread.exampl1;
+package workerthread.example1;
 
 import java.util.Random;
 
