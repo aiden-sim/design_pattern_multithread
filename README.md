@@ -409,5 +409,11 @@
    
 ![workerthread](https://user-images.githubusercontent.com/7076334/53735481-56145600-3eca-11e9-829f-606c460435e8.jpg)
 
+## Future (먼저 교환권을 받어라)
+- Future 패턴은 시간이 걸리는 처리를 포함하고 있는 보통의 클래스에 대하여 교환권을 만들어 주고, 멀티 쓰레드화하여 수행 능력을 높이는 패턴이다.
+
+
+
+![future](https://user-images.githubusercontent.com/7076334/54087721-2c12d600-4399-11e9-9cec-2b2db4a8080e.jpg)
 
 
