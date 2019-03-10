@@ -411,8 +411,23 @@
 
 ## Future (먼저 교환권을 받어라)
 - Future 패턴은 시간이 걸리는 처리를 포함하고 있는 보통의 클래스에 대하여 교환권을 만들어 주고, 멀티 쓰레드화하여 수행 능력을 높이는 패턴이다.
-
-
+- 관련 패턴
+  - Thread-Per-Message
+    - Thread-Per-Message 패턴은 시간이 걸리는 처리를 새로 만든 쓰레드에 맡기는 패턴이다. 처리 결과가 필요한 경우 Future를 사용한다.
+  - Builder
+    - Builder 패턴은 완성된 성과물을 나중에 가지러 간다.
+    - Future 패턴은 조립을 시작한 시점에 Future 역할의 객체가 만들어진다. 그리고 나중에 Future 역할을 사용하여 실제 성과물에 액세스 한다.
+  - Proxy
+    - Proxy 패턴에서는 RealSubject 역할을 만드는데 시간이 걸리기 때문에 Proxy 역할이 대리인으로서 최대한 처리 한다. 그래도 RealSubject 역할이 필요한 경우 역할을 만든다.(Virtual Proxy 패턴)
+    - Future 패턴에서는 RealData 역할을 만드는데 시간이 걸리기 때문에 Future 역할이 교환권이 된다. 그리고 별도의 쓰레드에서 RealData 역할을 만들어 둔다.
+  - Guarded Suspension
+    - Future 역할을 사용하면 RealData 역할에 액세스하는 메소드는 Guarded Suspension 패턴을 사용하여 가드 한다. 가드 조건은 RealData 역할이 만들어져 있을 것이다.
+  - Balking
+    - Future 역할은 1번만 대입할 수 있는 변수 이므로 래치의 일종으로 간주할 수 있다. Futuer 역할에 RealData 역할이 2번 이상 설정되는 것을 방지하고자 할때는 Balking 패턴이 사용된다.
+- 보 강
+  - java.util.concurrent 패키지
+    - java.util.concurrent.Callable 인터페이스는 반환 값이 있는 처리의 호출을 추상화한 인터페이스이다.
+    - java.util.concurrent.Future 인터페이스는 Future 역할에 해당 하는 인터페이스이다.
 
 ![future](https://user-images.githubusercontent.com/7076334/54087721-2c12d600-4399-11e9-9cec-2b2db4a8080e.jpg)
 
