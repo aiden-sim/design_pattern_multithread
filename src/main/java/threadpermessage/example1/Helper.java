@@ -1,4 +1,4 @@
-package threadpermessage.exampl1;
+package threadpermessage.example1;
 
 /**
  * Helper(원조자) 역할

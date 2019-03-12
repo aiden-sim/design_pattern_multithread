@@ -1,4 +1,4 @@
-package threadpermessage.exampl1;
+package threadpermessage.example1;
 
 /**
  * Client(의뢰자) 역할
