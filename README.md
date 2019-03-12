@@ -462,4 +462,15 @@
   
 ![Two-Phase](https://user-images.githubusercontent.com/7076334/54198246-55527400-4509-11e9-8b05-67d354c41f5b.jpg)
 
+## Thread-Specific Storage (쓰레드마다 가지고 있는 락커)
+- Thread-Specific Storage 패턴은 입구는 한 개이나 내부에 쓰레드 고유의 영역이 따로 만들어져 있는 패턴이다.
+- 다음과 같이 불리기도 한다.
+  - Per-Thread Attribute (각 쓰레드의 속성)
+  - Thread-Specific Data (쓰레드 고유의 데이터)
+  - Thread-Specific Field (쓰레드 고유의 필드)
+  - Thread-Local Storage (쓰레드의 지역적인 기억영역)
+- java.lang.ThreadLocal
+  - set 메소드 : 인수로 지정한 인스턴스를 이 메소드를 호출한 쓰레드(현재의 쓰레드)에 대응시켜서 보관하기 위한 것이다. 자기 락커에 자기 짐을 넣는 것에 해당한다.
+  - get 메소드 : get을 호출한 쓰레드(현재의 쓰레드)에 대응하는 인스턴스를 취득하기 위한 것이다. 한 번도 set으로 보관한 것이 없을 경우 반환 값은 null 이다. 자기 락커에서 자기 짐을 꺼내는 것에 해당한다.
+
 
