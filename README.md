@@ -453,8 +453,12 @@
     - Multi-Phase Startup 패턴은 복수의 서브 시스템이 존재할 때 다단계를 거쳐 시스템 전체를 기동하는 패턴이다.
   - Balking
     - Two-Phase Termination 패턴에서 종료 처리 중에 부적절한 처리가 이뤄지는 것을 막기 위해 Balking 패턴을 사용하는 경우가 있다.
-    
-    
+- 보 강
+  - java.util.concurrent.CountDownLatch
+    - 어떤 쓰레드가 지정한 쓰레드가 종료되기를 기다릴 때는 java.lang.Thread 클래스의 join 메소드를 이용한다.
+    - java.util.concurrent.CountDownLatch 클래스를 사용하면 지정한 회수만큼 countdown 메소드가 호출되기를 기다린다.
+  - java.util.concurrent.CyclicBarrier
+    - 쓰레드의 동기를 몇 번이고 반복하고 싶을 때에는 java.util.concurrent.CyclicBarrier 클래스를 사용하는 것이 편리하다.
   
 ![Two-Phase](https://user-images.githubusercontent.com/7076334/54198246-55527400-4509-11e9-8b05-67d354c41f5b.jpg)
 
