@@ -436,7 +436,26 @@
   - 안전하게 종료할 것(안전성)
   - 반드시 종료 처리를 할 것(생존성)
   - 종료 요구가 제시되면 가능한 빨리 종료 처리에 들어갈 것(응답성)
+- Thread 클래스의 stop 메소드를 사용해서는 안 된다.
+  - stop 메소드를 사용하면 인스턴스의 안전성이 보장되지 않기 때문이다.
+- interrupt 메소드를 사용하는 이유는 쓰레드 상태가 sleep 인 경우 즉시 끝나지 않기 때문에
+- join 메소드를 사용하면 지정한 쓰레드가 종료되길 기다린다.
+- isAlive 메소드를 사용하면 지정한 쓰레드가 종료했는지 조사할 수 있다.
+- 셧다운 후크(shutdown hook)
+  - Java 실행 처리계 전체가 종료할 때 (System.exit) start하는 쓰레드를 말한다.
+- 관련 패턴
+  - Before/After
+    - Two-Phase Termination 패턴에서는 종료 처리를 확실하게 실행하기 위해 finally를 사용한다.
+  - Multiphase Cancellation
+    - Multiphase Cancellation 패턴은 쓰레드를 종료시키려고 하는데 일정 시간 안에 종료 하지 않았을 때 점점 강한 종료 요구를 제시하는 패턴이다.
+  - Multi-Phase Startup
+    - Two-Phase Termination 패턴은 종료 요구를 받았을 때 곧바로 종료하는 것이 아니라 [종료 처리 중] 단계를 거침으로써 안전하게 쓰레드를 종료 시킨다.
+    - Multi-Phase Startup 패턴은 복수의 서브 시스템이 존재할 때 다단계를 거쳐 시스템 전체를 기동하는 패턴이다.
+  - Balking
+    - Two-Phase Termination 패턴에서 종료 처리 중에 부적절한 처리가 이뤄지는 것을 막기 위해 Balking 패턴을 사용하는 경우가 있다.
+    
+    
   
-  
+![Two-Phase](https://user-images.githubusercontent.com/7076334/54198246-55527400-4509-11e9-8b05-67d354c41f5b.jpg)
 
 
