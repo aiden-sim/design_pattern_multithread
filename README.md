@@ -511,5 +511,11 @@
 ![threadspecificstorage](https://user-images.githubusercontent.com/7076334/54275597-644f2a00-45ce-11e9-8b08-38864df19c7f.jpg)
 
 
+## Active Object (비동기 메시지를 맞이하는 능동적인 객체)
+- Active Object 패턴을 Actor, Concurrent Object 패턴이라고 부르기도 한다.
+- Active Object 패턴에 등장하는 능동적인 객체는 단순히 '자기 고유의 쓰레드를 갖는다' 에서 끝나지 않고, 외부로부터 비동기 메시지를 받아들여 처리할 수 있다. 또 필요에 따라 처리의 결과를 반환하는 특징을 가진다.
+
+![KakaoTalk_20190314_001943328](https://user-images.githubusercontent.com/7076334/54291782-7346d400-45f0-11e9-950d-f49ab13e53bd.jpg)
+
 
 
