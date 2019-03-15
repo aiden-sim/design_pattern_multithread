@@ -97,6 +97,7 @@
   
 ![singlethreadedexecution](https://user-images.githubusercontent.com/7076334/53421386-e52ff280-3a20-11e9-8323-cc8c8c1a075d.jpg)
 
+
 ## Immutable (망가뜨리고 싶어도 망가지지 않는다.)
 - 어떨 때 사용할까?
   - 인스턴스 상태가 변하지 않는 것이 필요할 때
@@ -127,6 +128,7 @@
   - fianl 클래스 필드 : 선언시나 정적 초기화 블록에서 처리
     
 ![immutable](https://user-images.githubusercontent.com/7076334/53419939-24a90f80-3a1e-11e9-8a5b-fea95b2d1ddd.jpg)
+
 
 ## Guarded Suspension (준비가 될 때까지 기다려라)
 - Guarded : 보호받고 있다. 지켜지고 있다, Suspension : 일시 정지함
@@ -245,7 +247,7 @@
   - sleep 메소드와 interrupt 메소드 (sleep 락 필요 없음)
     - sleep하고 있는 쓰레드는 interrupt가 호출되면 일시 정지를 중단하고 interrupted Execption이라고 하는 예외를 통보한다.
   - wait 메소드와 interrupt 메소드 (wait 락 필요)
-    - wait하고 있는 쓰레드는 interrupt가 호출되면 notify를 기라디지 않고 wait 셋에서 나오게 된다.
+    - wait하고 있는 쓰레드는 interrupt가 호출되면 notify를 기다리지 않고 wait 셋에서 나오게 된다.
     - 주의 할 점은 쓰레드는 wait 셋에 들어갈 때 일단 락을 해제한다. wait중 interrupt를 호출 받은 쓰레드(취소 쓰레드)는 락을 취한 다음 InterruptedExecption을 통보 한다.
     - notify/notifyAll은 java.lang.Object 클래스 메소드이며 실행하기 위해 락을 취해야 한다.
     - 반면 interrupt는 java.lang.Thread 클래스 메소드이며 락을 취할 필요 없이 쓰레드를 직접 깨운다.
@@ -338,11 +340,11 @@
 - 정 리
   - java.lang.Thread 클래스 : 가장 기본적인 쓰레드 생성,기동 클래스
   - java.lang.Runnable 인터페이스 : 쓰레드가 실행하는 일을 나타내는 인터페이스
-  - java.utilconcurrent.ThreadFactory 인터페이스 : 쓰레드 생성을 추상화한 인터페이스
-  - java.utilconcurrent.Executor 인터페이스 : 쓰레드의 실행을 추상화한 인터페이스
-  - java.utilconcurrent.ExecutorService 인터페이스 : 재사용되는 쓰레드의 실행을 추상화한 인터페이스
-  - java.utilconcurrent.ScheduledExecutorService 인터페이스 : 스케줄링 된 쓰레드의 실행을 추상화한 인터페이스
-  - java.utilconcurrent.Executors 인터페이스 : 인터페이스 생성의 유틸리티 클래스
+  - java.util.concurrent.ThreadFactory 인터페이스 : 쓰레드 생성을 추상화한 인터페이스
+  - java.util.concurrent.Executor 인터페이스 : 쓰레드의 실행을 추상화한 인터페이스
+  - java.util.concurrent.ExecutorService 인터페이스 : 재사용되는 쓰레드의 실행을 추상화한 인터페이스
+  - java.util.concurrent.ScheduledExecutorService 인터페이스 : 스케줄링 된 쓰레드의 실행을 추상화한 인터페이스
+  - java.util.concurrent.Executors 인터페이스 : 인터페이스 생성의 유틸리티 클래스
   
 ![threadpermessage](https://user-images.githubusercontent.com/7076334/53684320-107f4e00-3d4f-11e9-898a-91fff14e0c1a.jpg)
 
