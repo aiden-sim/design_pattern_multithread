@@ -516,6 +516,17 @@
 ## Active Object (비동기 메시지를 맞이하는 능동적인 객체)
 - Active Object 패턴을 Actor, Concurrent Object 패턴이라고 부르기도 한다.
 - Active Object 패턴에 등장하는 능동적인 객체는 단순히 '자기 고유의 쓰레드를 갖는다' 에서 끝나지 않고, 외부로부터 비동기 메시지를 받아들여 처리할 수 있다. 또 필요에 따라 처리의 결과를 반환하는 특징을 가진다.
+- 관련 패턴
+  - Producer-Consumer
+    - Producer-Consumer 패턴은 Client 역할이 Scheduler 역할에게 ConcreateMethodRequest 역할을 안전하게 건네는데 사용된다.
+    - Producer-Consumer 패턴의Channel 역할은 Active Object 패턴의 ActivationQueue 역할에 대응한다.
+  - Future
+    - Client 역할에게 반환 값(실행 결과)을 건넬 땐 Future 패턴이 사용된다.
+  - Worker Thread
+    - Scheduler 역할을 실현하는 부분에서 Worker Thread 패턴이 사용된다.
+  - Thread-Specific Sotrage
+    - Thread-Specific Storage 패턴은 쓰레드에게 고유 정보를 안겨주는 패턴이다.
+    - Active Object 패턴에서는 메소드를 기동하는 쓰레드와 메소드를 실행하는 쓰레드가 다르기 때문에 Thread-Specific Sotrage 패턴을 적용하기 어렵다.
 
 ![KakaoTalk_20190314_001943328](https://user-images.githubusercontent.com/7076334/54291782-7346d400-45f0-11e9-950d-f49ab13e53bd.jpg)
 
