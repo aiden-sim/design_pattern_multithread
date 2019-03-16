@@ -530,5 +530,36 @@
 
 ![KakaoTalk_20190314_001943328](https://user-images.githubusercontent.com/7076334/54291782-7346d400-45f0-11e9-950d-f49ab13e53bd.jpg)
 
+## Appendix A
+- reorder 란
+  - reorder란 최적화를 위해 컴파일이나 Java 가상머신이 프로그램의 처리 순서를 바꾸는 것을 말한다.
+  - 멀티 쓰레드 프로그램에서는 reorder가 원인이 되어 이상 작동을 하는 경우가 있다.
+- visibility 란
+  - 쓰레드 A가 필드 x에 입력한 값을 쓰레드 B에서 읽을 수 있다고 한다. 이것을 두고 '쓰레드 A가 x에 입력한 내용을 쓰레드 B가 볼 수 있다(visible이다)고 말한다.
+- synchronized
+  - synchronized는 쓰레드의 배타제어를 한다.
+    - synchronized가 있으면 쓰레드는 거기에서 lock/unlock 액션을 실행한다.
+    - lock/unlock이 이뤄지는 것은 synchronized 부분만 아니라 wait 메소드 내부에서 기다릴 때에도 락을 해제한다. 또한 wait 메소드로부터 나올 때에도 락을 다시 취한 뒤 움직인다.
+    - 이미 다른 쓰레드가 락을 취하고 있다면 다른 쓰레드는 wait 셋에 들어간다. 배타제어 (mutual exclusion)가 실현된다.
+  - 동기화
+    - Java 메모리 모델은 어떠한 쓰레드가 unlock보다 먼저 실행한 입력은 모두 lock을 실행한 쓰레드가 볼 수 있다는 것을 보증한다.
+- volatile
+  - volatile은 동기화를 한다. (캐시되지 않는다.)
+  - volatile은 쓰레드의 배타제어를 하지 않는다.
+  - 앞에서 "long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적" 라고 했는데 volatile은 long과 double을 최소 단위로 취급한다.
+- final
+  - 변하지 않는 필드는 final로 하라
+    - java 메모리 모델은 final 필드에 관하여 생성자가 끝나면 정상적으로 보인다는 사실을 보증한다.
+  - 생성자에서 this를 놓치지 말라 (주의하라)
+    - 생성자 안에서 클래스 필드에 this를 대입하는 것은 위험하다. 다른 쓰레드가 클래스 필드를 경유하여 만들기 시작한 인스턴스에 액세스할지도 모르기 때문이다.
+    - 생성자 안에서 this를 인수로 부여한 메소드를 것도 위험하다. 그 메소드가 다른 쓰레드로부터 액세스 되는 장소에 this를 놓을 가능성이 있기 때문이다.
+  
+  
+  
 
+  
+
+  
+  
+  
 
