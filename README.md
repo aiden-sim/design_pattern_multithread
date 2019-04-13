@@ -92,7 +92,7 @@
     - Single Threaded Execution은 복수의 쓰레드가 SharedResource 역할에 액세스 하지만, Thread-Specific Storage은 쓰레드마다 고유 영역이 확보되어 있고, 고유 영역에는 한 개의 쓰레드에서만 액세스할 수 있다. (가드 필요 없음)
 - 보 강
   - synchronized는 this의 락을 취해야 한다. (유일성)
-  - long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적
+  - long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적이지 않다.
   - 계수 세마포어 : 어떤 영역을 최대 N개의 쓰레드까지 실행
   
 ![singlethreadedexecution](https://user-images.githubusercontent.com/7076334/53421386-e52ff280-3a20-11e9-8323-cc8c8c1a075d.jpg)
@@ -546,7 +546,7 @@
 - volatile
   - volatile은 동기화를 한다. (캐시되지 않는다.)
   - volatile은 쓰레드의 배타제어를 하지 않는다.
-  - 앞에서 "long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적" 라고 했는데 volatile은 long과 double을 최소 단위로 취급한다.
+  - 앞에서 "long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적이지 " 라고 했는데 volatile은 long과 double을 최소 단위로 취급한다.
 - final
   - 변하지 않는 필드는 final로 하라
     - java 메모리 모델은 final 필드에 관하여 생성자가 끝나면 정상적으로 보인다는 사실을 보증한다.
