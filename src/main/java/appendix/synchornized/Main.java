@@ -1,7 +1,7 @@
 package appendix.synchornized;
 
 /**
- * x < y로 표시될 각능성은 사라진다.
+ * x < y로 표시될 가능성은 사라진다.
  */
 class Something {
     private int x = 0;
