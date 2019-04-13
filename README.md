@@ -546,7 +546,7 @@
 - volatile
   - volatile은 동기화를 한다. (캐시되지 않는다.)
   - volatile은 쓰레드의 배타제어를 하지 않는다.
-  - 앞에서 "long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적이지 " 라고 했는데 volatile은 long과 double을 최소 단위로 취급한다.
+  - 앞에서 "long과 double은 최소 단위로 취급하지 않는다. (synchronized 하지 않다.) =>32비트에서는 원자적, 64비트에서는 원자적이지 않다." 라고 했는데 volatile은 long과 double을 최소 단위로 취급한다.
 - final
   - 변하지 않는 필드는 final로 하라
     - java 메모리 모델은 final 필드에 관하여 생성자가 끝나면 정상적으로 보인다는 사실을 보증한다.
