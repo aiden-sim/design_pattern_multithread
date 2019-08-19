@@ -29,7 +29,7 @@
     - notifyAll 메소드를 사용하면 wait set에 있는 모든 쓰레드를 꺼낸다.
     - notify가 한 개의 쓰레드를 깨우는데 반해 notifyAll은 모든 쓰레드를 깨운다.
     - notify보다 notifyAll을 사용하는 편이 낫다.
-  - wait, notify, notifyAll은 Objectc 클래스의 메소드이다.
+  - wait, notify, notifyAll은 Object 클래스의 메소드이다.
   - 주의점
     - 락을 가지지 못한 쓰레드가 wait, notify, notifyAll 메소드를 호출하면 IlegalMonitorStateException이 발생된다.
 - 쓰레드의 상태 변화
